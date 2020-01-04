@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>05.ajax-http</title>
+</head>
+<body>
+<script>
+
+
+
+    var xhr=new XMLHttpRequest();
+    xhr.open('POST','add.php')//设置请求行
+    xhr.setRequestHeader('Foo','Bar');//设置一个请求头
+
+    //修改Content-Type为想要的类型  请求头根据请求体的格式变化而变化
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded')
+//    xhr.setRequestHeader('Content-Type','text/plain; charset-UTF-8')
+    xhr.send('key1=value1&key2=value2')//urlencoded格式设置请求体
+
+</script>
+</body>
+</html>

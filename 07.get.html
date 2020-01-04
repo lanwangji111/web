@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AJAX发送GET请求并传递参数</title>
+</head>
+<body>
+<ul id="list">
+    <!--<li>张三</li>-->
+    <!--<li>李四</li>-->
+    <!--<li>二傻子</li>-->
+    <!--<li>三愣子</li>-->
+</ul>
+
+<script>
+    var listElement=document.getElementById('list');
+
+
+    //发送请求获取列表数据呈现在页面上
+    var xhr =new XMLHttpRequest();
+    
+    xhr.open('GET','user.php');
+    
+    xhr.send();
+    
+    xhr.onreadystatechange=function () {
+        if(this.readyState!=4)return;
+//        console.log(this.responseText);
+
+        //把数据转换成JSON格式
+        var data=JSON.parse(this.responseText);
+//        console.log(data);
+
+        //遍历user.php中的data，对每一个data【i】对象，在网页上创建li元素并写入
+        for(var i=0;i<data.length;i++){
+//            console.log(data[i]);
+            var liElement=document.createElement('li');
+
+            liElement.innerHTML=data[i].name;
+            //这里如果data[i]  显示就会是[object Object]
+
+            liElement.id=data[i].id;
+            listElement.appendChild(liElement);
+            liElement.addEventListener('click',function () {
+                //TODO:通过AJAX操作获取服务器对应数据
+                //如何获取当前被点击元素对应的数据ID
+//                console.log(this.id);
+
+
+                //让点击获取的id  alert出age
+                var xhr1=new XMLHttpRequest();
+                xhr1.open('GET','user.php?id='+this.id)
+                xhr1.send();
+                xhr1.onreadystatechange=function () {
+                    if(this.readyState!=4) return
+//                    console.log(this.responseText);
+                    var obj=JSON.parse(this.responseText);
+                    alert(obj.age);
+                }
+            })
+        }
+    }
+
+
+
+    // var xhr = new XMLHttpRequest()
+    // // 这里任然是使用URL中的问号参数传递数据
+    // xhr.open('GET', 'users.php?id=2')
+    // xhr.send(null)
+
+    // xhr.onreadystatechange = function () {
+    //   if (this.readyState !== 4) return
+    //   console.log(this.responseText)
+    // }
+
+</script>
+</body>
+</html>

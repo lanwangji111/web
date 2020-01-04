@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>12.动态渲染数据到表格</title>
+</head>
+<body>
+<table>
+    <tbody id="content"></tbody>
+</table>
+<script>
+
+    //没写完
+
+
+    var xhr=new XMLHttpRequest();
+    var content=document.getElementById('content');
+    xhr.open('GET','test.php',true);
+    xhr.send();
+    xhr.onreadystatechange=function () {
+        if(this.readyState!=4) return;
+        var data=JSON.parse(this.responseText);
+//
+
+        for(var i=0;i<data.length;i++)
+        {
+            //先创建行
+            var td=document.createElement('td');
+
+            // 再创建列
+            var tr=document.createElement('tr');
+
+            td.innerHTML='<td></td><td></td><td></td><td></td><td></td>';
+            // 再将列添加到行
+            tr.appendChild('td');
+            // 再将行添加到table
+            content.appendChild('tr');
+            console.log(data[i]);
+        }
+    }
+</script>
+</body>
+</html>

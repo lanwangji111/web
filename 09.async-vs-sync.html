@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>09.async-vs-sync</title>
+</head>
+<body>
+<script>
+
+    /*
+    * 同步：同时只能做一件事
+    * 异步：同时可以做多件时间，不会出现等待情况（一般我们都用这个）
+    * */
+
+/*   异步通信的时间*/
+    console.time('async');
+    var xhr=new XMLHttpRequest();
+    //open方法第三个参数是async  可以传入一个布尔值，默认为true
+/*    open相当于架桥   */
+    xhr.open('GET','time.php',true);
+    xhr.send();
+    console.timeEnd('async');
+    console.log(xhr.responseText);
+    //这里不能输出  要写入 onreadystatechange 函数
+
+
+/*   同步通信的时间*/
+    console.time('sync');
+    var xhr1=new XMLHttpRequest();
+    //open方法第三个参数是async  可以传入一个布尔值，默认为true
+    /*    open相当于架桥   */
+    xhr1.open('GET','time.php',false);
+    xhr1.send();
+    console.timeEnd('sync');
+    console.log(xhr1.responseText);
+    //这里不需要编写 onreadystatechange 函数 - 把代码放到 send() 语句后面即可：
+
+
+
+
+/*   console.time的用法   */
+//    //启动秒表  秒表名abc，这里必须传一个参数
+//    console.time('abc')
+//    for(var i=0;i<100000000;i++){}
+//    console.timeEnd('abc')
+
+</script>
+</body>
+</html>

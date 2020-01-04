@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>10.同步模式注册时间问题</title>
+</head>
+<body>
+<script>
+    /*   异步  */
+    var xhr=new XMLHttpRequest();
+    xhr.open('GET','time.php',true);
+    xhr.send();//这里相当于请求响应还没有完成
+    xhr.onreadystatechange=function () {
+        console.log(this.responseText);
+    };
+
+    /*   同步  */
+    var xhr1=new XMLHttpRequest();
+    xhr1.open('GET','time.php',false);
+    xhr1.send();//等到请求响应的过程全部完成再继续
+
+    //这里请求响应过程已经全部完成，没有状态改变了  不需要写
+//    xhr1.onreadystatechange=function () {
+//        console.log(this.responseText);
+//    };
+</script>
+</body>
+</html>

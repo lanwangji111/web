@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>11.数据响应</title>
+</head>
+<body>
+<script>
+    var xhr=new XMLHttpRequest();
+    xhr.open('GET','xml.php',true);
+    xhr.send();
+    xhr.onreadystatechange=function () {
+        if(this.readyState!=4) return;
+
+        //this.responseXML 专门用于获取服务器返回的XML数据，操作方式是通过DOM方式操作
+        //但是需要服务器端响应头的Content-Type必须是application/xml
+        console.log(this.responseXML);
+    }
+</script>
+</body>
+</html>

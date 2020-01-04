@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>接收响应</title>
+</head>
+<body>
+<script>
+    var xhr=new XMLHttpRequest();
+
+    //如果需要捕获第一个状态变化，需要注意代码顺序问题
+//    xhr.onreadystatechange=function () {
+//        //这个事件并不是只在响应时触发，状态改变就触发
+////        console.log(1);
+//        console.log(this.readyState);
+//    };
+
+
+    xhr.open('GET','./time.php');
+    xhr.send();
+    //因为客户端永远不知道服务器何时才能返回我们需要的响应
+
+    //因为响应需要时间，所以无法通过返回值的方式返回响应
+    //所以AJAX API采用事件机制（通知的感觉）
+    xhr.onreadystatechange=function () {
+        //这个事件并不是只在响应时触发，xhr状态改变就触发
+//        console.log(1);
+        if(this.readyState!=4) return
+        //获取响应的内容（响应体）
+        console.log(this.responseText);
+    };
+
+//   var response= xhr.send();
+//    console.log(response);
+
+</script>
+</body>
+</html>
